@@ -1,0 +1,31 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 15
+VisualStudioVersion = 15.0.28307.271
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TheEverythingStore", "TheEverythingStore\TheEverythingStore.csproj", "{DFCC9D3E-A93D-4BC3-892B-09413C8FC3B0}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TheEverythingStore.Tests", "TheEverythingStore.Tests\TheEverythingStore.Tests.csproj", "{2BD7800E-279D-4D5F-BA76-EC5D738619F1}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{DFCC9D3E-A93D-4BC3-892B-09413C8FC3B0}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{DFCC9D3E-A93D-4BC3-892B-09413C8FC3B0}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{DFCC9D3E-A93D-4BC3-892B-09413C8FC3B0}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{DFCC9D3E-A93D-4BC3-892B-09413C8FC3B0}.Release|Any CPU.Build.0 = Release|Any CPU
+		{2BD7800E-279D-4D5F-BA76-EC5D738619F1}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{2BD7800E-279D-4D5F-BA76-EC5D738619F1}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{2BD7800E-279D-4D5F-BA76-EC5D738619F1}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{2BD7800E-279D-4D5F-BA76-EC5D738619F1}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {9F6E038B-E856-4631-A4FE-DBAF1A558FF7}
+	EndGlobalSection
+EndGlobal
