@@ -1,5 +1,4 @@
-
-    <h1>The Everything Store</h1>
+<h1>The Everything Store</h1>
 
     <p>this site is build in COMP2084 server side scripting.
     It uses MVC 5, SQL server, entity framework and twitter bootStrap.
