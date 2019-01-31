@@ -9,6 +9,9 @@ namespace TheEverythingStore.Controllers
 {
     public class HomeController : Controller
     {
+
+        // connect to db
+        private DbModel db =new DbModel();
         public ActionResult Index()
         {
             return View();
@@ -41,14 +44,17 @@ namespace TheEverythingStore.Controllers
             ViewBag.Products = products;
             */
 
-            var products = new List<Product>();
+            //var products = new List<Product>();
 
-            for (int i=1;i<=10;i++)
-            {
-                Product product = new Product();
-                product.Name = "Product " + i.ToString();
-                products.Add(product);
-            }
+            //for (int i=1;i<=10;i++)
+            //{
+            //    Product product = new Product();
+            //    product.Name = "Product " + i.ToString();
+            //    products.Add(product);
+            //}
+
+            //use the product model to retrieve the entire product list from the sql server
+            var products = db.Products.ToList();
 
             //load the view and pass the product list to it
 
