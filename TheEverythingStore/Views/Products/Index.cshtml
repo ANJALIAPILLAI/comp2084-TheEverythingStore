@@ -42,7 +42,11 @@
             @Html.DisplayFor(modelItem => item.Price)
         </td>
         <td>
-            <img src="~/Content/Images/@item.Photo" class="thumb" />
+            @if (item.Photo != null)
+            {
+                <img src="~/Content/Images/@item.Photo" class="thumb" />
+            }
+
         </td>
         <td>
             @Html.ActionLink("Edit", "Edit", new { id=item.ProductId }) |

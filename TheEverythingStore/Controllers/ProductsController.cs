@@ -91,9 +91,9 @@ namespace TheEverythingStore.Controllers
                 {
                     var file = Request.Files[0];
 
-                    if(file.FileName != null && file.ContentLength>1)
+                    if(file.FileName != null && file.ContentLength > 0)
                     {
-                        String path=Server.MapPath("~Content/Images/" + file.FileName);
+                        string path = Server.MapPath("~/Content/Images/" + file.FileName);
                         file.SaveAs(path);
                         product.Photo = file.FileName;
                     }
