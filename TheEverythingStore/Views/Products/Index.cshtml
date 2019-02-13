@@ -7,29 +7,38 @@
 
 <h2>@ViewBag.Title</h2>
 
-<p>
-    @Html.ActionLink("Create New", "Create")
-</p>
+@if (User.IsInRole("Administrator"))
+{
+    <p>
+        @Html.ActionLink("Create New", "Create")
+    </p>
+}
+
 <table class="table table-striped table-hover sortable">
     <tr>
         <th>
-           Category
+            Category
         </th>
         <th>
             Product
-        </th>      
+        </th>
         <th>
             @Html.DisplayNameFor(model => model.Price)
         </th>
         <th>
             @Html.DisplayNameFor(model => model.Photo)
         </th>
-        <th>
-            Actions
-        </th>
+        @if (User.IsInRole("Administrator"))
+        {
+            <th>
+                Actions
+            </th>
+        }
+
     </tr>
 
-@foreach (var item in Model) {
+    @foreach (var item in Model)
+    {
     <tr>
         <td>
             @Html.DisplayFor(modelItem => item.Category.Name)
@@ -37,7 +46,7 @@
         <td>
             @Html.DisplayFor(modelItem => item.Name)
         </td>
-        
+
         <td>
             @Html.DisplayFor(modelItem => item.Price)
         </td>
@@ -48,12 +57,20 @@
             }
 
         </td>
-        <td>
-            @Html.ActionLink("Edit", "Edit", new { id=item.ProductId }) |
-            @Html.ActionLink("Details", "Details", new { id=item.ProductId }) |
-            @Html.ActionLink("Delete", "Delete", new { id=item.ProductId })
-        </td>
-    </tr>
-}
+
+        @if (User.IsInRole("Administrator"))
+        {
+            <td>
+                @Html.ActionLink("Edit", "Edit", new { id = item.ProductId }) 
+                |
+                @Html.ActionLink("Details", "Details", new { id = item.ProductId }) 
+                |
+                @Html.ActionLink("Delete", "Delete", new { id = item.ProductId })
+            </td>
+        }
+
+            
+        </tr>
+    }
 
 </table>

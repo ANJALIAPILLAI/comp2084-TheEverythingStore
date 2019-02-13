@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Data;
 using System.Data.Entity;
+using System.IO;
 using System.Linq;
 using System.Net;
 using System.Web;
@@ -10,10 +11,12 @@ using TheEverythingStore.Models;
 
 namespace TheEverythingStore.Controllers
 {
+    [Authorize(Roles ="Administrator")]
     public class ProductsController : Controller
     {
         private DbModel db = new DbModel();
 
+        [AllowAnonymous]
         // GET: Products
         public ActionResult Index()
         {
@@ -82,7 +85,7 @@ namespace TheEverythingStore.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "ProductId,Name,Description,Price,Photo,CategoryId")] Product product)
+        public ActionResult Edit([Bind(Include = "ProductId,Name,Description,Price,Photo,CategoryId")] Product product, String CurrentPhoto)
         {
             if (ModelState.IsValid)
             {
@@ -93,10 +96,25 @@ namespace TheEverythingStore.Controllers
 
                     if(file.FileName != null && file.ContentLength > 0)
                     {
-                        string path = Server.MapPath("~/Content/Images/" + file.FileName);
+                        //the below code only works for chrome and firefox not with edge
+                        //string path = Server.MapPath("~/Content/Images/" + file.FileName);
+                        //file.SaveAs(path);
+                        //product.Photo = file.FileName;
+
+                        //the below code works for any browser
+                        var fName = Path.GetFileName(file.FileName); //ignores the path and gets only the file name
+                        //fName = HttpUtility.HtmlEncode(fName);
+                        string path = Server.MapPath("~/Content/Images/" + fName);
                         file.SaveAs(path);
-                        product.Photo = file.FileName;
+                        product.Photo = fName;
+
+
                     }
+                }
+                else
+                {
+                    //if no new photo is added in the edit
+                    product.Photo = CurrentPhoto;
                 }
                 db.Entry(product).State = EntityState.Modified;
                 db.SaveChanges();
