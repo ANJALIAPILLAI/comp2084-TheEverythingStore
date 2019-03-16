@@ -25,6 +25,7 @@ namespace TheEverythingStore.Controllers
         }
 
         // GET: Products/Details/5
+        [AllowAnonymous]
         public ActionResult Details(int? id)
         {
             if (id == null)

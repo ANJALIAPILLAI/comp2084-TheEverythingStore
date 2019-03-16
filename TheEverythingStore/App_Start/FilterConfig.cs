@@ -10,7 +10,7 @@ namespace TheEverythingStore
             filters.Add(new HandleErrorAttribute());
             
             //force all requests to use SSL
-            filters.Add(new RequireHttpsAttribute());
+            //filters.Add(new RequireHttpsAttribute());
         }
     }
 }
