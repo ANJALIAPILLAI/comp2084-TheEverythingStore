@@ -22,7 +22,8 @@ namespace TheEverythingStore.Tests.Controllers
             ViewResult result = controller.Index() as ViewResult;
 
             // Assert
-            Assert.IsNotNull(result);
+            // Assert.IsNotNull(result);
+            Assert.AreEqual("Index", result.ViewName);
         }
 
         [TestMethod]
@@ -36,6 +37,20 @@ namespace TheEverythingStore.Tests.Controllers
 
             // Assert
             Assert.AreEqual("Your application description page.", result.ViewBag.Message);
+        }
+
+        [TestMethod]
+        public void AboutLoadView()
+        {
+            //Arrange
+            HomeController controller = new HomeController();
+
+            //Act
+            ViewResult result = controller.About() as ViewResult;
+
+            //Assert
+            Assert.AreEqual("About", result.ViewName);
+
         }
 
         [TestMethod]

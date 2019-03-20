@@ -13,12 +13,26 @@ namespace TheEverythingStore.Controllers
     [Authorize(Roles ="Administrator")]
     public class CategoriesController : Controller
     {
-        private DbModel db = new DbModel();
+        // private DbModel db = new DbModel();
+
+        IMockCategories db;
+           
+       //constructors
+       //defalut constructor: no input params=> use sql server and entity framework
+       public CategoriesController()
+        {
+            this.db = new IDataCategories();
+        }
+
+        public CategoriesController(IMockCategories mockDb)
+        {
+            this.db = mockDb;
+        }
 
         // GET: Categories
         public ActionResult Index()
         {
-            return View(db.Categories.OrderBy(c => c.Name).ToList());
+            return View("Index", db.Categories.OrderBy(c => c.Name).ToList());
         }
 
         // GET: Categories/Details/5
@@ -28,7 +42,8 @@ namespace TheEverythingStore.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Category category = db.Categories.Find(id);
+            //Category category = db.Categories.Find(id);
+            Category category = db.Categories.SingleOrDefault(c => c.CategoryId == id);
             if (category == null)
             {
                 return HttpNotFound();
@@ -51,8 +66,10 @@ namespace TheEverythingStore.Controllers
         {
             if (ModelState.IsValid)
             {
-                db.Categories.Add(category);
-                db.SaveChanges();
+                //db.Categories.Add(category);
+                //db.SaveChanges();
+                db.Save(category);
+
                 return RedirectToAction("Index");
             }
 
@@ -66,7 +83,8 @@ namespace TheEverythingStore.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Category category = db.Categories.Find(id);
+            //Category category = db.Categories.Find(id);
+            Category category = db.Categories.SingleOrDefault(c => c.CategoryId == id);
             if (category == null)
             {
                 return HttpNotFound();
@@ -83,8 +101,9 @@ namespace TheEverythingStore.Controllers
         {
             if (ModelState.IsValid)
             {
-                db.Entry(category).State = EntityState.Modified;
-                db.SaveChanges();
+                //db.Entry(category).State = EntityState.Modified;
+                //db.SaveChanges();
+                db.Save(category);
                 return RedirectToAction("Index");
             }
             return View(category);
@@ -97,7 +116,8 @@ namespace TheEverythingStore.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Category category = db.Categories.Find(id);
+            //Category category = db.Categories.Find(id);
+            Category category = db.Categories.SingleOrDefault(c => c.CategoryId == id);
             if (category == null)
             {
                 return HttpNotFound();
@@ -110,9 +130,11 @@ namespace TheEverythingStore.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(int id)
         {
-            Category category = db.Categories.Find(id);
-            db.Categories.Remove(category);
-            db.SaveChanges();
+            //Category category = db.Categories.Find(id);
+            Category category = db.Categories.SingleOrDefault(c => c.CategoryId == id);
+            //db.Categories.Remove(category);
+            //db.SaveChanges();
+            db.Delete(category);
             return RedirectToAction("Index");
         }
 

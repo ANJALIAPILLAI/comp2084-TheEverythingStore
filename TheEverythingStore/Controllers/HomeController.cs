@@ -14,14 +14,14 @@ namespace TheEverythingStore.Controllers
         private DbModel db =new DbModel();
         public ActionResult Index()
         {
-            return View();
+            return View("Index");
         }
 
         public ActionResult About()
         {
             ViewBag.Message = "Your application description page.";
 
-            return View();
+            return View("About");
         }
 
         public ActionResult Contact()
