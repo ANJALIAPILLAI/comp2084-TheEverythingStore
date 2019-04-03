@@ -16,12 +16,26 @@ namespace TheEverythingStore.Controllers
     {
         private DbModel db = new DbModel();
 
+        //IMockProducts db;
+
+        ////constructors
+        ////defalut constructor: no input params=> use sql server and entity framework
+        //public ProductsController()
+        //{
+        //    this.db = new IDataProducts();
+        //}
+
+        //public ProductsController(IMockProducts mockDb)
+        //{
+        //    this.db = mockDb;
+        //}
+
         [AllowAnonymous]
         // GET: Products
         public ActionResult Index()
         {
             var products = db.Products.Include(p => p.Category);
-            return View(products.OrderBy(p => p.Category.Name).ThenBy(p => p.Name).ToList());
+            return View("Index", products.OrderBy(p => p.Category.Name).ThenBy(p => p.Name).ToList());
         }
 
         // GET: Products/Details/5
@@ -91,11 +105,11 @@ namespace TheEverythingStore.Controllers
             if (ModelState.IsValid)
             {
                 //check for a file upload
-                if(Request.Files != null)
+                if (Request.Files != null)
                 {
                     var file = Request.Files[0];
 
-                    if(file.FileName != null && file.ContentLength > 0)
+                    if (file.FileName != null && file.ContentLength > 0)
                     {
                         //the below code only works for chrome and firefox not with edge
                         //string path = Server.MapPath("~/Content/Images/" + file.FileName);
@@ -117,15 +131,15 @@ namespace TheEverythingStore.Controllers
                     //if no new photo is added in the edit
                     product.Photo = CurrentPhoto;
                 }
-                db.Entry(product).State = EntityState.Modified;
+                 db.Entry(product).State = EntityState.Modified;
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
             ViewBag.CategoryId = new SelectList(db.Categories, "CategoryId", "Name", product.CategoryId);
-            return View(product);
+            return View("Edit", product);
         }
 
-        // GET: Products/Delete/5
+        //// GET: Products/Delete/5
         public ActionResult Delete(int? id)
         {
             if (id == null)
